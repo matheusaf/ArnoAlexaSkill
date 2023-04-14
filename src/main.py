@@ -35,7 +35,7 @@ file_logger.setFormatter(
 file_logger.addFilter(lg.Filter(name="root"))
 
 stdout_logger = lg.StreamHandler()
-stdout_logger.setLevel(lg.WARNING)
+stdout_logger.setLevel(lg.DEBUG)
 
 root_log.setLevel(lg.DEBUG)
 root_log.addHandler(file_logger)
@@ -105,10 +105,16 @@ async def main() -> None:
                     cls=ArnoCommandDecoder
                 )
 
-                response = await http_client.patch(
-                    f"{BACKEND_BASE_URL}/{command.fan_id}",
-                    body=str(command)
-                )
+                if command.state_report:
+                    response = await http_client.get(
+                        f"{BACKEND_BASE_URL}/{command.fan_id}",
+                    )
+                    
+                else:
+                    response = await http_client.patch(
+                        f"{BACKEND_BASE_URL}/{command.fan_id}",
+                        body=str(command)
+                    )
 
                 response.raise_for_status()
 
@@ -125,7 +131,7 @@ async def main() -> None:
                 arno_response = ArnoResponse(
                     status_code=response.status,
                     response_message=response_body,
-                    is_response_ok=response.ok
+                    success=response.ok
                 )
 
                 try:

@@ -45,8 +45,9 @@ class AlexaResponse:
             self.event.pop('endpoint')
 
     def add_context_property(self, **kwargs):
+        if len(self.context_properties) == 0:
+            self.context_properties.append(self.create_context_property())
         self.context_properties.append(self.create_context_property(**kwargs))
-        self.context_properties.append(self.create_context_property())
 
     def add_cookie(self, key, value):
 
@@ -59,13 +60,18 @@ class AlexaResponse:
         self.payload_endpoints.append(self.create_payload_endpoint(**kwargs))
 
     def create_context_property(self, **kwargs):
-        return {
+        context_property = {
             'namespace': kwargs.get('namespace', 'Alexa.EndpointHealth'),
             'name': kwargs.get('name', 'connectivity'),
             'value': kwargs.get('value', {'value': 'OK'}),
             'timeOfSample': get_utc_timestamp(),
             'uncertaintyInMilliseconds': kwargs.get('uncertainty_in_milliseconds', 0)
         }
+
+        if kwargs.get("instance"):
+            context_property["instance"] = kwargs.get("instance")
+
+        return context_property
 
     def create_payload_endpoint(self, **kwargs):
         # Return the proper structure expected for the endpoint.
@@ -114,6 +120,11 @@ class AlexaResponse:
                 'proactively_reported', False)
             capability['properties']['retrievable'] = kwargs.get(
                 'retrievable', False)
+            if kwargs.get('capabilityResources', None):
+                capability['capabilityResources'] = kwargs.get(
+                    'capabilityResources')
+            if kwargs.get('semantics', None):
+                capability['semantics'] = kwargs.get('semantics')
         return capability
 
     def get(self, remove_empty=True):

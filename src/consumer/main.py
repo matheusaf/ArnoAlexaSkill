@@ -125,7 +125,7 @@ async def main() -> None:
                 arno_response = ArnoResponse(
                     status_code=response.status,
                     response_message=response_body,
-                    is_response_ok=response.ok
+                    success=response.ok
                 )
 
                 try:

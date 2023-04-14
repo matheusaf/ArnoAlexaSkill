@@ -11,12 +11,12 @@ class ArnoResponse:
     ]
 
     __status_code_: int
-    __response_message_: str
+    __response_message_: dict
     __success_: bool
 
-    def __init__(self, status_code: int = -1, response_message: str = "", is_response_ok: bool = False) -> None:
+    def __init__(self, status_code: int = -1, response_message: dict = {}, success: bool = False) -> None:
         self.__status_code_ = status_code
-        self.__success_ = is_response_ok
+        self.__success_ = success
         self.__response_message_ = response_message
 
     @property
@@ -28,11 +28,11 @@ class ArnoResponse:
         self.__status_code_ = value
 
     @property
-    def response_message(self) -> str:
+    def response_message(self) -> dict:
         return self.__response_message_
 
     @response_message.setter
-    def response_message(self, value: str) -> None:
+    def response_message(self, value: dict) -> None:
         self.__response_message_ = value
 
     @property

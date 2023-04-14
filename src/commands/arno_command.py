@@ -7,8 +7,9 @@ from utils import build_dict_public_properties
 class ArnoCommand:
     __fan_id_: int = -1
     __speed_: Optional[int] = None
-    __rotation_: Optional[int] = None
+    __rotation_direction_: Optional[int] = None
     __state_: Optional[bool] = None
+    __state_report_ = False
 
     def __init__(self) -> None:
         pass
@@ -30,12 +31,12 @@ class ArnoCommand:
         self.__speed_ = value
 
     @property
-    def rotation(self) -> Optional[int]:
-        return self.__rotation_
+    def rotation_direction(self) -> Optional[int]:
+        return self.__rotation_direction_
 
-    @rotation.setter
-    def rotation(self, value: Optional[int]) -> None:
-        self.__rotation_ = value
+    @rotation_direction.setter
+    def rotation_direction(self, value: Optional[int]) -> None:
+        self.__rotation_direction_ = value
 
     @property
     def state(self) -> Optional[bool]:
@@ -44,6 +45,14 @@ class ArnoCommand:
     @state.setter
     def state(self, value: Optional[bool]) -> None:
         self.__state_ = value
+
+    @property
+    def state_report(self) -> bool:
+        return self.__state_report_
+
+    @state_report.setter
+    def state_report(self, value: bool) -> None:
+        self.__state_report_ = value
 
     def __str__(self) -> None:
         return json.dumps(self, cls=ArnoCommandEncoder)
