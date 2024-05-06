@@ -1,3 +1,5 @@
+[![Ruff (Linter)](https://github.com/matheusaf/ArnoAlexaSkill/actions/workflows/ruff.yml/badge.svg)](https://github.com/matheusaf/ArnoAlexaSkill/actions/workflows/ruff.yml)
+
 # Alexa Ceiling Fan Controller for Arno Vx10
 
 ## Overview
