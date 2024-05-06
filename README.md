@@ -17,7 +17,7 @@ These instructions will get you a copy of the project up and running on your loc
 - A ceiling fan with remote control functionality
 
 ### Installation
-1. Clone the repository: `git clone https://github.com/username/alexa-ceiling-fan-controller.git`
+1. Clone the repository: `git clone https://github.com/matheusaf/ArnoAlexaSkill.git`
 2. Install poetry: `python -m pip install poetry`
 2. Install the dependencies: `poetry install`
 
