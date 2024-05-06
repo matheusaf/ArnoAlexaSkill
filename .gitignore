@@ -1,0 +1,7 @@
+*.zip
+*.log
+__pycache__
+env
+venv
+*.aws
+.vscode
